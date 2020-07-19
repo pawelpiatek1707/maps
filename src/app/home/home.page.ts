@@ -40,15 +40,16 @@ export class HomePage implements OnInit{
 
   ngOnInit() {
     this.point1 = new Feature({
+      type: 'click',
       geometry: new Point([2101042.6887812307, 6496193.376841301])
     })
 
     this.point1.setStyle(new Style({
       image: new Icon(({
-        color: '#8959A8',
+        color: 'blue',
         crossOrigin: 'anonymous',
         src: 'assets/pin.svg',
-        imgSize: [20,20]
+        imgSize: [30,30]
       }))
     }));
 
@@ -81,7 +82,11 @@ export class HomePage implements OnInit{
 
   onclick() {
     this.map.on('click', (e)=>{
-      console.log(e);
+      
+      this.map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+        console.log(e.pixel);
     })
+    })
+    
   }
 }
